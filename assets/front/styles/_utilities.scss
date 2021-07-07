@@ -1,0 +1,90 @@
+@use 'media-queries' as m;
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+[class⁼col-] {
+  flex-basis: 100%;
+}
+
+$columns: 12;
+
+@include m.mq(big) {
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      flex: 0 0 (100% / ($columns / $i));
+    }
+
+    .col-offset-#{$i} {
+      margin-left: 100% / ($columns/$i);
+    }
+  }
+}
+
+// @for $i from 1 through 5 {
+//   .m-#{$i} {
+//     margin: #{$i}rem;
+//   }
+//   .ms-#{$i} {
+//     margin-left: #{$i}rem;
+//   }
+//   .me-#{$i} {
+//     margin-right: #{$i}rem;
+//   }
+//   .mb-#{$i} {
+//     margin-bottom: #{$i}rem;
+//   }
+//   .mt-#{$i} {
+//     margin-top: #{$i}rem;
+//   }
+//   .p-#{$i} {
+//     padding: #{$i}rem;
+//   }
+//   .ps-#{$i} {
+//     padding-left: #{$i}rem;
+//   }
+//   .pe-#{$i} {
+//     padding-right: #{$i}rem;
+//   }
+//   .pb-#{$i} {
+//     padding-bottom: #{$i}rem;
+//   }
+//   .pt-#{$i} {
+//     padding-top: #{$i}rem;
+//   }
+// }
+
+.container {
+  width: 70vw;
+  margin: 0 auto;
+
+  @include m.mq(large) {
+    width: 80vw;
+  }
+
+  @include m.mq(small) {
+    width: 85vw;
+  }
+}
+
+.select {
+  &--purple {
+    ::selection {
+      background: var(--purple);
+      color: #f1f1f1;
+    }
+  }
+  &--green {
+    ::selection {
+      background: var(--green);
+    }
+  }
+  &--primary {
+    ::selection {
+      background: var(--primary);
+      color: #f1f1f1;
+    }
+  }
+}

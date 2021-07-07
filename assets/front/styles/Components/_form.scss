@@ -1,0 +1,53 @@
+.add-movie {
+  margin-top: 5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  .form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    & + .form-group {
+      margin-top: 2rem;
+    }
+    input, textarea, select {
+      padding: 1.5rem;
+      border-radius: .5rem;
+      overflow: hidden;
+      &::placeholder {
+        color: transparent;
+      }
+      &:not(:placeholder-shown) {
+        & + label {
+          display: none;
+        }
+      }
+      &:focus {
+        & + label {
+          transform: translateY(-50%) translateX(-200%);
+        }
+      }
+    }
+    label {
+      position: absolute;
+      color: rgba(51, 51, 51, 0.48);
+      top: 50%;
+      transform: translateY(-50%);
+      left: 1rem;
+      transition: transform .2s ease-in-out;
+    }
+    label[for='date'] {
+      color: transparent;
+    }
+  }
+
+  input[type='submit'] {
+    margin: 2rem 0;
+    width: fit-content;
+  }
+
+}

@@ -1,0 +1,38 @@
+
+.btn {
+  padding: 1rem;
+  border: 0;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.74));
+  color: #f1f1f1;
+  border-radius: .3rem;
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  &-danger {
+    background: #972424;
+  }
+  &-update {
+    color: #333;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: #77d50d;
+  }
+}
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  .btn + .btn, form + .btn {
+    margin-left: 1rem;
+  }
+  form {
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  form input[type='submit'] {
+    margin: 0;
+  }
+}
