@@ -64,10 +64,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $Messages;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ContactMessage::class, mappedBy="user")
+     */
+    private $contactMessages;
+
     public function __construct()
     {
         $this->Posts = new ArrayCollection();
         $this->Messages = new ArrayCollection();
+        $this->contactMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +255,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($message->getUser() === $this) {
                 $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContactMessage[]
+     */
+    public function getContactMessages(): Collection
+    {
+        return $this->contactMessages;
+    }
+
+    public function addContactMessage(ContactMessage $contactMessage): self
+    {
+        if (!$this->contactMessages->contains($contactMessage)) {
+            $this->contactMessages[] = $contactMessage;
+            $contactMessage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactMessage(ContactMessage $contactMessage): self
+    {
+        if ($this->contactMessages->removeElement($contactMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($contactMessage->getUser() === $this) {
+                $contactMessage->setUser(null);
             }
         }
 

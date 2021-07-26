@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostCategory;
 use App\Form\AddPostType;
+use App\Form\FiltersPostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,11 +30,35 @@ class AdminPostController extends AbstractController
     }
 
     #[Route('/admin/post', name: 'admin_post')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $posts = $this->postRepository->findAll();
+        $form = $this->createForm(FiltersPostType::class);
+        $form->handleRequest($request);
+        $posts = $this->postRepository->createQueryBuilder('p');
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            if($formData->getTitle()) {
+                $posts
+                    ->andWhere('p.title LIKE :title')
+                    ->setParameter('title', '%' . $formData->getTitle() . '%');
+            }
+            if($formData->getContent()) {
+                $posts
+                    ->andWhere('p.content LIKE :content')
+                    ->setParameter('content', $formData->getContent());
+            }
+            if($formData->getPostCategory()) {
+                $posts
+                    ->join('p.postCategory', 'pc')
+                    ->andWhere('pc.id = :postcat')
+                    ->setParameter('postcat', $formData->getPostCategory()->getId());
+            }
+        }
+        $posts = $posts->getQuery()->getResult();
         return $this->render('admin_post/index.html.twig', [
             'posts' => $posts,
+            'form' => $form->createView()
         ]);
     }
 

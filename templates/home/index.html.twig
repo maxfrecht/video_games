@@ -7,6 +7,9 @@
             <p>Connectez-vous et profitez de ce super mega trop top site !!!!!!!!!!!!!!!!</p>
         {% endif %}
         {% if app.user %}
+            {% if app.request.get('message') %}
+                <p class="success">Votre message à bien été envoyé</p>
+            {% endif %}
             {% if not item %}
                 <div class="games">
             {% endif %}
@@ -53,7 +56,8 @@
                 {% for post in posts %}
                     <div class="post game">
                         <div class="game-top">
-                            <h2 class="title">{{ post.title }}<br><span style="font-size: 1.4rem">nombre de vue : {{ post.numberView }}</span></h2>
+                            <h2 class="title">{{ post.title }}<br><span
+                                        style="font-size: 1.4rem">nombre de vue : {{ post.numberView }}</span></h2>
                             <span style="font-style: italic">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
                         </div>
                         <p>{{ post.content }}</p>
@@ -61,7 +65,8 @@
                             <a href="{{ path('post_id', {'id': post.id}) }}" class="btn" style="margin: 0 0 2rem 2rem">Lire
                                 plus</a>
                         {% else %}
-                            <a href="{{ path('home') }}" class="btn" style="margin: 0 0 2rem 2rem">Retour à l'accueil</a>
+                            <a href="{{ path('home') }}" class="btn" style="margin: 0 0 2rem 2rem">Retour à
+                                l'accueil</a>
                         {% endif %}
                     </div>
                 {% endfor %}

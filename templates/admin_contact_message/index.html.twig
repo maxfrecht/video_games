@@ -1,0 +1,22 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Hello AdminContactMessageController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <ul class="items-crud post-categories">
+            {% for message in messages %}
+                <li class="post-category">
+                    <span>{{ message.subject }} - {{ message.isRead ? ('Traité le ' ~ message.readAt|date('d/m/Y à h:i:s')) : 'Non traité' }}</span>
+                    <div class="buttons">
+                        {% if not message.isRead %}
+                            <a class="btn btn-success"
+                               href="{{ path("admin_message_readen", {'id': message.id}) }}">Marquer
+                                comme traité</a>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

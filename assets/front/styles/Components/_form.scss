@@ -22,8 +22,9 @@ form, .form-box {
       top: 50%;
       transform: translateY(-50%);
       left: 1rem;
-      transition: transform .2s ease-in-out;
+      transition: transform .2s ease-in-out, opacity .2s ease-in-out;
       order: -1;
+      opacity: 1;
       user-select: none;
     }
     & .form-group, & + div {
@@ -44,10 +45,14 @@ form, .form-box {
       &:focus {
         & + label:not(label[for='registration_form_agreeTerms']){
           transform: translateY(-50%) translateX(-200%);
+          opacity: 0;
         }
       }
     }
 
+    select + label {
+      display: none;
+    }
 
     label[for='date'] {
       color: transparent;
@@ -65,4 +70,28 @@ form, .form-box {
   background: rgba(255,255,255, 0.1);
   padding: 2rem;
   border-radius: .4rem;
+}
+
+.form-inline {
+  flex-direction: row;
+  min-width: 100%;
+  align-items: center;
+  margin-bottom: 2rem;
+
+
+
+  .form-group, div:not(div:last-of-type):not(.form-group) {
+    & .form-group, & + div {
+      margin-top: 0;
+    }
+    input {
+      border-radius: .5rem 0 0 .5rem;
+    }
+  }
+  .btn {
+    margin: 0;
+    width: auto;
+    border-radius: 0 .5rem .5rem 0;
+    height: 100%;
+  }
 }

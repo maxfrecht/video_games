@@ -1,0 +1,24 @@
+.errors {
+  display: flex;
+  flex-direction: column;
+  a {
+    color: #333;
+    padding: 2rem;
+    background: #ccc;
+    width: fit-content;
+    margin-top: 1rem;
+    border-radius: 1rem;
+  }
+  .error,
+  .success {
+    background: red;
+    color: #f1f1f1;
+    padding: 2rem;
+    & + .error {
+      margin-top: 1rem;
+    }
+  }
+  .success {
+    background: green;
+  }
+}

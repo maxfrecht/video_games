@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PostCategory;
 use App\Form\AddPostCategoryType;
+use App\Form\FiltersPostCategoryType;
 use App\Repository\PostCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,11 +38,23 @@ class AdminPostCategoryController extends AbstractController
     }
 
     #[Route('/admin/get-post-category', name: 'get_post_category')]
-    public function getPostCategory(): Response
+    public function getPostCategory(Request $request): Response
     {
-        $posts = $this->postCategoryRepository->findAll();
+        $form = $this->createForm(FiltersPostCategoryType::class);
+        $form->handleRequest($request);
+        $posts = $this->postCategoryRepository->createQueryBuilder('p');
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $posts = $posts
+                ->where('p.name LIKE :formName')
+                ->setParameter('formName', '%' . $form->getData()->getName() . '%');
+        }
+
+        $posts = $posts->getQuery()->getResult();
+
         return $this->render('admin_post_category/postcategory.html.twig', [
             'posts' => $posts,
+            'form' => $form->createView(),
         ]);
     }
 
