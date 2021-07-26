@@ -1,0 +1,12 @@
+{% extends 'layout/admin.html.twig' %}
+{% block title %}Hello AdminPostCategoryController!{% endblock %}
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_row(form.title, {'attr': {'placeholder' : 'placeholder'}}) }}
+        {{ form_row(form.content, {'attr': {'placeholder' : 'placeholder', 'rows': '10'}}) }}
+        {{ form_row(form.postCategory, {'attr': {'placeholder' : 'placeholder'}}) }}
+        {{ form_row(form.submit, {'attr': {'class': 'btn btn-submit'}}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

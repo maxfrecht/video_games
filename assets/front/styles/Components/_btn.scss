@@ -1,15 +1,30 @@
 
 .btn {
-  padding: 1rem;
-  border: 0;
-  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.74));
+  display:inline-block;
+  padding: 1rem 1.5rem;
+  background: #333;
   color: #f1f1f1;
+  border: .1rem solid rgba(241,241,241, 0.1);
   border-radius: .3rem;
   cursor: pointer;
   width: fit-content;
   height: fit-content;
+  font-size: 1.8rem;
+  transition: transform .2s ease-in-out;
+
+  &-alone {
+    margin: 0 0 2rem 2rem;
+  }
+
+  &:hover {
+    transform: scale(1.01) perspective(1px);
+  }
   &-danger {
     background: #972424;
+  }
+  &-success {
+    background: #13c113;
+    color: #333;
   }
   &-update {
     color: #333;
@@ -21,7 +36,6 @@
 }
 
 .buttons {
-  margin-top: 2rem;
   display: flex;
   align-items: center;
   .btn + .btn, form + .btn {
@@ -35,4 +49,9 @@
   form input[type='submit'] {
     margin: 0;
   }
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
 }

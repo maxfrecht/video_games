@@ -1,0 +1,18 @@
+{% extends 'layout/admin.html.twig' %}
+{% block title %}Hello AdminPostCategoryController!{% endblock %}
+{% block body %}
+    <div class="container">
+        <ul class="items-crud post-categories">
+            {% for post in posts %}
+                <li class="post-category">
+                    <span>{{ post.name }}</span>
+                    <div class="buttons">
+                        <a class="btn btn-danger" href="{{ path("delete_post_category", {'id': post.id}) }}">✖</a>
+                        <a class="btn btn-success" href="{{ path("update_post_category", {'id': post.id}) }}">↑</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ path("add_post_category") }}" class="btn" style="margin-top: 2rem">Ajouter une categorie de post</a>
+    </div>
+{% endblock %}

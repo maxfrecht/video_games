@@ -1,0 +1,12 @@
+.items-crud {
+  display: grid;
+  grid-gap: 2rem;
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: rgba(241, 241, 241, 0.4);
+    border-radius: .3rem;
+  }
+}

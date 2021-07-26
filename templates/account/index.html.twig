@@ -1,0 +1,58 @@
+{% extends '/layout/user.html.twig' %}
+
+{% block title %}mon Compte{% endblock %}
+
+{% block body %}
+    <div class="container container-full-page-nav">
+
+        {% if update == false and app.user is not null %}
+            <div class="center-box glass">
+                <div class="user-top">
+                    <h1 class="title">
+                        {{ app.user.FirstName ? app.user.FirstName : '' }} {{ app.user.LastName ? app.user.LastName : '' }}
+                        <span>{{ "now"|date("m/d/Y", "Europe/Paris") }}</span>
+                    </h1>
+                    {% if app.user.avatar %}
+                        <img src="{{ app.user.avatar }}" alt="avatar">
+                    {% endif %}
+                </div>
+                <ul>
+                    <li>Prénom : {{ app.user.FirstName ? app.user.FirstName : '' }}</li>
+                    <li>Nom : {{ app.user.LastName ? app.user.LastName : '' }}</li>
+                    <li>Email : {{ app.user.email ? app.user.email : '' }}</li>
+                </ul>
+                <a class="btn" href="{{ path('account') ~ '?update=true' }}">Modifier mes informations</a></div>
+        {% endif %}
+        {% if update %}
+            <h1 class="title">
+                Modifier mes informations
+            </h1>
+            <form action="{{ path('update_user') }}" method="post">
+                <div class="form-group">
+                    <input placeholder="placeholder" type="text" name="firstname" id="firstname"
+                           value="{{ app.user.FirstName ? app.user.FirstName : '' }}">
+                    <label for="firstname">Prénom</label>
+                </div>
+                <div class="form-group">
+                    <input placeholder="placeholder" type="text" name="lastname" id="lastname"
+                           value="{{ app.user.LastName ? app.user.LastName : '' }}">
+                    <label for="lastname">Nom</label>
+                </div>
+                <div class="form-group">
+                    <input placeholder="placeholder" type="text" name="email" id="email"
+                           value="{{ app.user.email ? app.user.email : '' }}">
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="form-group">
+                    <input placeholder="placeholder" type="text" name="avatar" id="avatar"
+                           value="{{ app.user.Avatar ? app.user.Avatar : '' }}">
+                    <label for="avatar">Lien Avatar</label>
+                </div>
+                <input class="btn" type="submit" value="Valider les modifications">
+            </form>
+        {% endif %}
+        {% if app.user is null %}
+            <p>Vous n'êtes plus connecté</p>
+        {% endif %}
+    </div>
+{% endblock %}

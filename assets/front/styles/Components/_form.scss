@@ -1,18 +1,33 @@
-.add-movie {
-  margin-top: 5rem;
-}
-
-form {
+form, .form-box {
   display: flex;
   flex-direction: column;
-
-  .form-group {
+  div:last-of-type:not(.form-group) {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    input {
+      margin-left: 2rem;
+      min-width: 1.8rem;
+      min-height: 1.8rem;
+    }
+  }
+  .form-group, div:not(div:last-of-type):not(.form-group) {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
-    & + .form-group {
-      margin-top: 2rem;
+    label:not(label[for='registration_form_agreeTerms']) {
+      position: absolute;
+      color: rgba(51, 51, 51, 0.48);
+      top: 50%;
+      transform: translateY(-50%);
+      left: 1rem;
+      transition: transform .2s ease-in-out;
+      order: -1;
+      user-select: none;
+    }
+    & .form-group, & + div {
+      margin-top: 4rem;
     }
     input, textarea, select {
       padding: 1.5rem;
@@ -22,32 +37,32 @@ form {
         color: transparent;
       }
       &:not(:placeholder-shown) {
-        & + label {
+        & + label:not(label[for='registration_form_agreeTerms']){
           display: none;
         }
       }
       &:focus {
-        & + label {
+        & + label:not(label[for='registration_form_agreeTerms']){
           transform: translateY(-50%) translateX(-200%);
         }
       }
     }
-    label {
-      position: absolute;
-      color: rgba(51, 51, 51, 0.48);
-      top: 50%;
-      transform: translateY(-50%);
-      left: 1rem;
-      transition: transform .2s ease-in-out;
-    }
+
+
     label[for='date'] {
       color: transparent;
     }
   }
-
-  input[type='submit'] {
+  input[type='submit'], button[type='submit'] {
     margin: 2rem 0;
     width: fit-content;
   }
+}
 
+.form-box {
+  width: 50%;
+  margin: 0 auto;
+  background: rgba(255,255,255, 0.1);
+  padding: 2rem;
+  border-radius: .4rem;
 }

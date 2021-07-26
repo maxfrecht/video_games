@@ -1,0 +1,41 @@
+.user-top {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem;
+  background: rgba(255,255,255,.2);
+  border-radius: 1rem;
+  img {
+    border-radius: 50%;
+    max-width: 5rem;
+    margin-right: 2rem;
+    box-shadow:
+            0 0 0 .2rem #ccc,
+            0 0 0 .4rem #333,
+            0 0 0 .6rem #ccc,
+            0 0 0 .8rem #333;
+  }
+  h1 {
+    margin-bottom:0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 1.4rem;
+      margin-left: 2rem;
+      padding: 1rem 2rem;
+      background: #333;
+      border-radius: .4rem;
+    }
+  }
+}
+.center-box {
+  padding: 4rem;
+  ul  {
+    margin: 5rem 0;
+    li + li {
+      margin-top: 1rem;
+    }
+  }
+}
