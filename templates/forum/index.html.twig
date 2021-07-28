@@ -3,7 +3,17 @@
 {% block title %}Hello ForumController!{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-
-</div>
+    <div class="container container-full-page-nav">
+        <h1 class="title">Forums</h1>
+        <div class="forums">
+            {% for forum in forums %}
+                <ul class="forum">
+                    <li>
+                        <h2>{{ forum.title }}</h2>
+                        <a href="{{ path('forum_topics', {'id': forum.id}) }}" class="btn">Tous les sujets</a>
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

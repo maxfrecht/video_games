@@ -1,0 +1,23 @@
+{% extends '/layout/user.html.twig' %}
+
+{% block title %}Hello ForumController!{% endblock %}
+
+{% block body %}
+    <div class="container container-full-page-nav">
+        <h1 class="title">Sujets du forum</h1>
+        <div class="forums">
+            {% for topic in topics %}
+                <ul class="forum">
+                    <li>
+                        <h2 class="title">{{ topic.title }}</h2>
+                        <a href="" class="btn">Voir</a>
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+        {% if topics|length < 1 %}
+            <p>Il n'y a pas encore de discussion ouverte dans ce forum</p>
+        {% endif %}
+        <a class="btn" style="margin-top: 2rem" href="">Créer un nouveau sujet</a>
+    </div>
+{% endblock %}
