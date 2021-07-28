@@ -1,13 +1,14 @@
 {% extends 'layout/admin.html.twig' %}
-{% block title %}Hello AdminPostCategoryController!{% endblock %}
+{% block title %}Admin - catégories des actualités{% endblock %}
 {% block body %}
     <div class="container">
+        <h2 class="title">Catégories d'actualité</h2>
         {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
         <div class="form-group">
             {{ form_widget(form.name, {'attr': {'placeholder': 'name'}}) }}
-            {{ form_label(form.name) }}
+            {{ form_label(form.name, 'Terme de recherche') }}
         </div>
-        {{ form_row(form.submit) }}
+        {{ form_row(form.submit, {'label': 'Rechercher'}) }}
         {{ form_end(form) }}
         <ul class="items-crud post-categories">
             {% for post in posts %}

@@ -1,0 +1,21 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Game index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Liste des jeux</h1>
+        <ul class="items-crud">
+            {% for game in games %}
+                <li class="game-category post-category">
+                    <span>{{ game.title }}</span>
+                    <div class="buttons">
+                        <a class="btn" href="{{ path('admin_game_show', {'id': game.id}) }}}">Voir</a>
+                        <a class="btn btn-success" href="{{ path('admin_game_edit', {'id': game.id}) }}">↑</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a style="margin-top: 2rem" class="btn" href="{{ path('admin_game_new') }}">Créer</a>
+    </div>
+{% endblock %}

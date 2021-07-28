@@ -16,9 +16,11 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@types/swiper": "^5.4.3",
         "animate.css": "^4.1.1",
         "sass": "^1.35.1",
         "sass-loader": "^12.1.0",
+        "swiper": "^6.8.0",
         "transition-style": "^0.1.1",
         "ts-loader": "^9.2.3",
         "typescript": "^4.3.5"

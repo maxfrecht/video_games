@@ -1,20 +1,28 @@
 {% extends '/layout/admin.html.twig' %}
 
-{% block title %}Hello AdminContactMessageController!{% endblock %}
+{% block title %}Admin - contact message{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container container-full-page-nav">
+        <h2 class="title" style="margin-bottom: 8rem">Messages reçus</h2>
         <ul class="items-crud post-categories">
             {% for message in messages %}
-                <li class="post-category">
-                    <span>{{ message.subject }} - {{ message.isRead ? ('Traité le ' ~ message.readAt|date('d/m/Y à h:i:s')) : 'Non traité' }}</span>
-                    <div class="buttons">
-                        {% if not message.isRead %}
-                            <a class="btn btn-success"
-                               href="{{ path("admin_message_readen", {'id': message.id}) }}">Marquer
-                                comme traité</a>
-                        {% endif %}
+                <li class="message" style="--createdAt:'{{ 'Reçu le ' ~ message.createdAt|date('d/m/Y à h:i:s') ~ ' par ' ~ message.user.firstName ~ ' ' ~ message.user.lastName }}'">
+                    <div class="post-category contact-message">
+                        <span class="contact-message-content">{{ message.subject }} - {{ message.isRead ? ('Traité le ' ~ message.readAt|date('d/m/Y à h:i:s')) : 'Non traité' }}</span>
+                        <div class="buttons">
+                            {% if not message.isRead %}
+                                <a class="btn btn-success"
+                                   href="{{ path("admin_message_readen", {'id': message.id}) }}">Marquer
+                                    comme traité</a>
+                            {% else %}
+                                <a class="btn"
+                                   href="{{ path("admin_message_not_readen", {'id': message.id}) }}">Marquer
+                                    comme non lu</a>
+                            {% endif %}
+                        </div>
                     </div>
+                    <p>{{ message.message }}</p>
                 </li>
             {% endfor %}
         </ul>

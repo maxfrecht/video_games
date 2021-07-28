@@ -19,6 +19,7 @@ class AddPostType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
+            ->add('pathImg', TextType::class)
             ->add('postCategory', EntityType::class, [
                 'class' => PostCategory::class,
                 'choice_label' => 'name',

@@ -44,4 +44,15 @@ class AdminContactMessageController extends AbstractController
         $this->em->flush();
         return $this->redirectToRoute('admin_message');
     }
+
+    #[Route('/admin/message/not-read/{id}', name: 'admin_message_not_readen')]
+    public function notRead(int $id): Response
+    {
+        $message = $this->contactMessageRepository->find($id);
+        $message->setIsRead(0);
+        $message->setReadAt(null);
+        $this->em->persist($message);
+        $this->em->flush();
+        return $this->redirectToRoute('admin_message');
+    }
 }

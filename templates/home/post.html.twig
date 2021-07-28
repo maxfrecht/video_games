@@ -1,0 +1,16 @@
+<div class="post game">
+    <div class="game-top">
+        <h2 class="title">{{ post.title }}<br><span
+                    style="font-size: 1.4rem">nombre de vue : {{ post.numberView }}</span></h2>
+        <span style="font-style: italic">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
+    </div>
+    <div class="img-box"><img src="{{ post.pathImg }}" alt="image mise en avant"></div>
+    <p>{{ post.content }}</p>
+    {% if not item %}
+        <a href="{{ path('post_id', {'id': post.id}) }}" class="btn" style="margin: 0 0 2rem 2rem">Lire
+            plus</a>
+    {% else %}
+        <a href="{{ path('home') }}" class="btn" style="margin: 0 0 2rem 2rem">Retour à
+            l'accueil</a>
+    {% endif %}
+</div>

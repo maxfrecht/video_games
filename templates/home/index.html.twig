@@ -2,7 +2,7 @@
 {% block title %}home{% endblock %}
 {% block bodyclass %}home{% endblock %}
 {% block body %}
-    <div class="container container-full-page-nav">
+    <div class="container container-full-page-nav" style="overflow: hidden">
         {% if not app.user %}
             <p>Connectez-vous et profitez de ce super mega trop top site !!!!!!!!!!!!!!!!</p>
         {% endif %}
@@ -11,67 +11,23 @@
                 <p class="success">Votre message à bien été envoyé</p>
             {% endif %}
             {% if not item %}
-                <div class="games">
-            {% endif %}
-            {% if games is not null %}
-                {% for game in games %}
-                    <div class="game {{ item ? 'game-alone' : '' }}">
-                        <div class="game-top">
-                            <div class="game-top-left">
-                                <h2 class="title">{{ game.title }}</h2>
-                                <div class="categories animate__animated animate__heartBeat">
-                                    {% for category in game.gameCategory %}
-                                        <p>{{ category.name }}</p>
-                                    {% endfor %}
-                                </div>
-                                <p class="date"
-                                   style="margin-top: 1rem; opacity: .5; font-style:italic;">{{ game.launchAt|date("m/d/Y") }}</p>
-                            </div>
-                            <div class="game-top-right">
-                                {% for device in game.devices %}
-                                    <img src="{{ device.pathLogo }}" alt="logo device">
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="img-box"><img style="--src:url('{{ game.pathImg }}')"
-                                                  transition-style="in:wipe:top-right" src="{{ game.pathImg }}" alt="">
-                        </div>
-                        <p>{{ item ? game.description : game.description|slice(0, 255) ~ '...' }}</p>
-                        {% if not item %}
-                            <a class="btn btn-alone" href="{{ path("game_id", {"id": game.id}) }}">Voir la fiche</a>
-                        {% else %}
-                            <div class="btn-group"><a href="#" class="btn ">Voir les sujets associés</a>
-                                <a href="{{ path("home") }}" class="btn">Retour à la liste de jeux</a></div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+                {% include '/home/slider-game.html.twig' %}
+            {% else %}
+                {% if games is not null %}
+                    {% for game in games %}
+                        {% include '/home/game.html.twig' %}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
             {% if not item %}
-                </div>
                 <div class="posts" style="margin: 4rem 0 0 4rem"></div>
             {% endif %}
-
             {% if posts is not null %}
                 <h2 class="title"> News</h2>
                 {% for post in posts %}
-                    <div class="post game">
-                        <div class="game-top">
-                            <h2 class="title">{{ post.title }}<br><span
-                                        style="font-size: 1.4rem">nombre de vue : {{ post.numberView }}</span></h2>
-                            <span style="font-style: italic">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
-                        </div>
-                        <p>{{ post.content }}</p>
-                        {% if not item %}
-                            <a href="{{ path('post_id', {'id': post.id}) }}" class="btn" style="margin: 0 0 2rem 2rem">Lire
-                                plus</a>
-                        {% else %}
-                            <a href="{{ path('home') }}" class="btn" style="margin: 0 0 2rem 2rem">Retour à
-                                l'accueil</a>
-                        {% endif %}
-                    </div>
+                    {% include '/home/post.html.twig' %}
                 {% endfor %}
             {% endif %}
         {% endif %}
     </div>
-
 {% endblock %}

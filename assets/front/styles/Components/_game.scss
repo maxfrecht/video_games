@@ -1,3 +1,8 @@
+.swiper-games {
+  width: 100%;
+  max-height: fit-content;
+}
+
 .game {
   background: rgba( 255, 255, 255, 0.2 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -79,7 +84,6 @@
 }
 .game-top-right {
   height: fit-content;
-  place-items: center;
   display:grid;
   direction: rtl;
   grid-gap: 2rem;

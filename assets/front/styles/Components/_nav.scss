@@ -36,6 +36,7 @@ nav {
         top: 100%;
         border-radius: .5rem;
         transform: translateX(-50%);
+        animation-duration: .25s;
       }
 
       &:hover .drop-down {

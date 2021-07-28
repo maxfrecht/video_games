@@ -1,6 +1,7 @@
 .errors {
   display: flex;
   flex-direction: column;
+  width: 100%;
   a {
     color: #333;
     padding: 2rem;
@@ -9,16 +10,28 @@
     margin-top: 1rem;
     border-radius: 1rem;
   }
-  .error,
-  .success {
-    background: red;
-    color: #f1f1f1;
-    padding: 2rem;
-    & + .error {
-      margin-top: 1rem;
+
+  ul {
+    li {
+      background: red;
+      color: #f1f1f1;
+      padding: 2rem;
+      & + li {
+        margin-top: 1rem;
+      }
     }
   }
-  .success {
-    background: green;
+}
+
+.error,
+.success {
+  background: red;
+  color: #f1f1f1;
+  padding: 2rem;
+  & + .error {
+    margin-top: 1rem;
   }
+}
+.success {
+  background: green;
 }

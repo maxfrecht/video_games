@@ -39,6 +39,7 @@ class ContactController extends AbstractController
             $message->setMessage($form->getData()->getMessage());
             $message->setUser($user);
             $message->setSubject($form->getData()->getSubject());
+            $message->setCreatedAt(new \DateTime());
             $this->em->persist($message);
             $this->em->flush();
             return $this->redirectToRoute('home', ['message'=>true]);

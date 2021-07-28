@@ -1,0 +1,30 @@
+<div class="game {{ item ? 'game-alone' : '' }}">
+    <div class="game-top">
+        <div class="game-top-left">
+            <h2 class="title">{{ game.title }}</h2>
+            <div class="categories animate__animated animate__heartBeat">
+                {% for category in game.gameCategory %}
+                    <p>{{ category.name }}</p>
+                {% endfor %}
+            </div>
+            <p class="date"
+               style="margin-top: 1rem; opacity: .5; font-style:italic;">{{ game.launchAt|date("m/d/Y") }}</p>
+        </div>
+        <div class="game-top-right">
+            {% for device in game.devices %}
+                <img src="{{ device.pathLogo }}" alt="logo device">
+            {% endfor %}
+        </div>
+    </div>
+    <div class="img-box"><img style="--src:url('{{ game.pathImg }}')"
+                              transition-style="in:wipe:top-right" src="{{ game.pathImg }}"
+                              alt="">
+    </div>
+    <p>{{ item ? game.description : game.description|slice(0, 255) ~ '...' }}</p>
+    {% if not item %}
+        <a class="btn btn-alone" href="{{ path("game_id", {"id": game.id}) }}">Voir la fiche</a>
+    {% else %}
+        <div class="btn-group"><a href="#" class="btn ">Voir les sujets associés</a>
+            <a href="{{ path("home") }}" class="btn">Retour à la liste de jeux</a></div>
+    {% endif %}
+</div>

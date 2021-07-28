@@ -7,6 +7,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   background: rgb(23, 7, 40);
   color: #ebfff1;
+  overflow-x: hidden;
   &:before {
     content: url('../images/heroes.png');
     position: fixed;
