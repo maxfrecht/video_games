@@ -1,0 +1,21 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Liste des messages du forum{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Liste des messages du forum</h1>
+        <ul class="items-crud">
+            {% for message in messages %}
+                <li class="message-category post-category">
+                    <span>{{ message.content|slice(0,10) ~ ' - ' ~ message.topic.title ~ ' - ' ~ message.user.firstName ~ ' ' ~ message.user.lastName ~ ' - ' ~ message.createdAt|date('d/m/Y à H:i:s') }}</span>
+                    <div class="buttons">
+                        <a class="btn" href="{{ path('admin_message_show', {'id': message.id}) }}}">Voir</a>
+                        <a class="btn btn-success" href="{{ path('admin_message_edit', {'id': message.id}) }}">↑</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a style="margin-top: 2rem" class="btn" href="{{ path('admin_message_new') }}">Créer</a>
+    </div>
+{% endblock %}

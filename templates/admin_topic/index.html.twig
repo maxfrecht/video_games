@@ -1,0 +1,21 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Liste des sujets{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Liste des sujets</h1>
+        <ul class="items-crud">
+            {% for topic in topics %}
+                <li class="topic-category post-category">
+                    <span>{{ topic.title }} - {{ topic.forum.title }}</span>
+                    <div class="buttons">
+                        <a class="btn" href="{{ path('admin_topic_show', {'id': topic.id}) }}}">Voir</a>
+                        <a class="btn btn-success" href="{{ path('admin_topic_edit', {'id': topic.id}) }}">↑</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a style="margin-top: 2rem" class="btn" href="{{ path('admin_topic_new') }}">Créer</a>
+    </div>
+{% endblock %}

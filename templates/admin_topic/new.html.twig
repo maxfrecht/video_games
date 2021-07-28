@@ -1,0 +1,13 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Nouveau sujet{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Créer un nouveau sujet</h1>
+
+        {{ include('admin_topic/_form.html.twig') }}
+
+        <a class="btn" href="{{ path('admin_topic_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

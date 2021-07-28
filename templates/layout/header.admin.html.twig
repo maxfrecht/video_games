@@ -7,13 +7,15 @@
                 <li class="nav-item"><a href="#" class="nav-link">A propos</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Github</a></li>
                 <li class="nav-item">
-                    Listes de données
+                    Gestion des données
                     <ul class="drop-down  animate__animated animate__backInDown animate__faster">
                         <li><a href="{{ path("get_post_category") }}">Categories</a></li>
                         <li><a href="{{ path("admin_post") }}">Actualités</a></li>
                         <li><a href="{{ path("admin_message") }}">Message</a></li>
                         <li><a href="{{ path("admin_forum_index") }}">Forums</a></li>
                         <li><a href="{{ path("admin_game_index") }}">Jeux</a></li>
+                        <li><a href="{{ path("admin_topic_index") }}">Sujets</a></li>
+                        <li><a href="{{ path("admin_message_index") }}">Messages du forum</a></li>
                     </ul>
                 </li>
                 {% if app.user %}

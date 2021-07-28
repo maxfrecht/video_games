@@ -1,0 +1,14 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Edit Topic{% endblock %}
+
+{% block body %}
+    <div class="container container-full-page-nav">
+        <h1 class="title">Modifier le sujet</h1>
+
+        {{ include('admin_topic/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('admin_topic_index') }}">Retour à la liste</a>
+
+    </div>
+{% endblock %}
