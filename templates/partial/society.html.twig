@@ -1,0 +1,11 @@
+<h4 class="title">Societé</h4>
+<ul>
+    <li>{{ society.ligne1 }}</li>
+    <li>{{ society.ligne2 }}</li>
+    {% if society.ligne3 is not null %}
+        <li>{{ society.ligne3 }}</li>
+    {% endif %}
+    <li>{{ society.cp ~ ' - ' ~ society.town }}</li>
+    <li>tel : {{ society.phoneNumber }}</li>
+    <li>email : {{ society.email }}</li>
+</ul>

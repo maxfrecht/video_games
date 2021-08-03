@@ -17,13 +17,13 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class)
-            ->add('topic', EntityType::class, [
-                'class' => Topic::class,
-                'choice_label' => 'title',
-                'label' => 'Sujet',
-                'placeholder' => 'Sélectionner un sujet',
-                'required' => false
-            ])
+//            ->add('topic', EntityType::class, [
+//                'class' => Topic::class,
+//                'choice_label' => 'title',
+//                'label' => 'Sujet',
+//                'placeholder' => 'Sélectionner un sujet',
+//                'required' => false
+//            ])
             ->add('submit', SubmitType::class)
         ;
     }

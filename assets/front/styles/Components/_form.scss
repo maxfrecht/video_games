@@ -1,6 +1,34 @@
+p[id^='priceSlider'], p[id^='noteSlider'] {
+  margin-bottom:2rem;
+}
+.noUi-connect {
+  background: #49107a;
+}
+.toggle-form {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(241, 241, 241, 0.3);
+  cursor: pointer;
+  margin-bottom:4rem;
+  &:after {
+    content: '\25BC';
+    transition: transform .2s ease-in-out;
+  }
+}
+.toggle-form.open {
+  &:after {
+    transform: rotate(180deg);
+  }
+}
+.toggleable {
+  max-height: 0;
+}
 form, .form-box {
   display: flex;
   flex-direction: column;
+  transition: max-height .2s ease-in-out;
+  overflow: hidden;
   div:last-of-type:not(.form-group):not(#game_gameCategory):not(#game_devices) {
     display: flex;
     flex-direction:row;
@@ -11,7 +39,7 @@ form, .form-box {
       min-height: 1.8rem;
     }
   }
-  .form-group, div:not(div:last-of-type):not(.form-group) {
+  .form-group, & > div:not(div:last-of-type):not(.form-group):not(#priceSlider):not(#noteSlider) {
     position: relative;
     display: flex;
     flex-direction: column-reverse;
@@ -89,8 +117,6 @@ form, .form-box {
   min-width: 100%;
   align-items: center;
   margin-bottom: 2rem;
-
-
 
   .form-group, div:not(div:last-of-type):not(.form-group) {
     & .form-group, & + div {

@@ -1,15 +1,19 @@
-.swiper-games {
-  width: 100%;
-  max-height: fit-content;
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 4rem;
 }
-
 .game {
   background: rgba( 255, 255, 255, 0.2 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   border-radius: 10px;
-
+  min-height: 100%;
+  p {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+  }
   .img-box {
     min-width:100%;
     max-height: 32.5rem;
@@ -46,15 +50,16 @@
 }
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 10rem);
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, 7.5rem);
+  grid-gap: 1rem;
   overflow: hidden;
 
   p {
     display: inline-block;
     text-align: center;
-    padding: .5rem 1rem;
+    padding: .1rem .5rem;
     border-radius:.3rem;
+    font-size: 1.4rem;
   }
 
   @for $i from 1 through 5 {
@@ -76,7 +81,7 @@
 
 .game-top {
   .title {
-    max-width: 40%;
+    max-width: 70%;
   }
   display: grid;
   grid-template-columns: repeat(2,auto);
@@ -84,16 +89,13 @@
 }
 .game-top-right {
   height: fit-content;
+  flex: 30%;
   display:grid;
   direction: rtl;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, 4rem);
+  grid-template-columns: repeat(auto-fill, 2rem);
   img {
-  max-width: 2.5rem;
+    max-width: 1rem;
     filter: grayscale(1);
   }
-}
-
-.post + .post {
-  margin-top: 4rem;
 }

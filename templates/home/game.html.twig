@@ -9,6 +9,7 @@
             </div>
             <p class="date"
                style="margin-top: 1rem; opacity: .5; font-style:italic;">{{ game.launchAt|date("m/d/Y") }}</p>
+            <p class="stars">{{ show_stars(game) }}</p>
         </div>
         <div class="game-top-right">
             {% for device in game.devices %}
@@ -20,11 +21,11 @@
                               transition-style="in:wipe:top-right" src="{{ game.pathImg }}"
                               alt="">
     </div>
-    <p>{{ item ? game.description : game.description|slice(0, 255) ~ '...' }}</p>
+    <p>{{ item ? game.description|nl2br : game.description|slice(0, 255) ~ '...' }}</p>
     {% if not item %}
         <a class="btn btn-alone" href="{{ path("game_id", {"id": game.id}) }}">Voir la fiche</a>
     {% else %}
-        <div class="btn-group"><a href="#" class="btn ">Voir les sujets associés</a>
+        <div class="btn-group"><a href="{{ path('forum_topics_game', {'id': game.id }) }}" class="btn ">Voir les sujets associés</a>
             <a href="{{ path("home") }}" class="btn">Retour à la liste de jeux</a></div>
     {% endif %}
 </div>

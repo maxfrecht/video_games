@@ -1,0 +1,42 @@
+.swiper-games {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  $slide: ".swiper-slide";
+  .swiper-slide {
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+    //transition : all .2s ease-in-out;
+    &-active {
+      opacity: 1;
+      visibility: visible;
+
+      @for $i from 1 through 2 {
+        & + #{$slide} {
+          opacity: 1;
+          visibility: visible;
+        }
+        $slide: "#{$slide} + .swiper-slide";
+      }
+    }
+  }
+
+
+  div[class^="swiper-button-"] {
+    position: absolute;
+    top: 50%;
+    z-index: 1000;
+    cursor: pointer;
+    transform: scale(2);
+  }
+
+  .swiper-button-prev {
+    left: -10rem;
+  }
+
+  .swiper-button-next {
+    right: -10rem;
+  }
+}

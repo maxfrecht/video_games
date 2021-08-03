@@ -1,7 +1,7 @@
 @forward 'reset';
 @forward 'base';
 @forward 'variables';
-@forward 'utilities';
+//@forward 'utilities';
 @forward 'animations';
 @forward 'Components/titles';
 @forward 'Components/nav';
@@ -16,3 +16,9 @@
 @forward 'Components/contactMessage';
 @forward 'Components/post';
 @forward 'Components/forums';
+@forward 'Components/contact';
+@forward 'Components/message';
+@forward 'Components/slider';
+@forward 'Components/pagination';
+@forward 'fonts';
+@forward "bootstrap";

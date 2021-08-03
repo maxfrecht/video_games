@@ -1,0 +1,14 @@
+// Required
+@import "../../../node_modules/bootstrap/scss/functions";
+
+// Default variable overrides
+$spacer: 1.3334rem;
+
+$grid-gutter-width: 4rem;
+
+// Required
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+
+@import '../../../node_modules/bootstrap/scss/bootstrap-grid';

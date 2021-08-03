@@ -2,7 +2,7 @@
 {% block title %}home{% endblock %}
 {% block bodyclass %}home{% endblock %}
 {% block body %}
-    <div class="container container-full-page-nav" style="overflow: hidden">
+    <div class="container" >
         {% if not app.user %}
             <p>Connectez-vous et profitez de ce super mega trop top site !!!!!!!!!!!!!!!!</p>
         {% endif %}
@@ -20,13 +20,18 @@
                 {% endif %}
             {% endif %}
             {% if not item %}
-                <div class="posts" style="margin: 4rem 0 0 4rem"></div>
+                <h2 class="title" style="margin: 4rem 0"> News</h2>
+{#                <div class="row row-cols-1 row-cols-md-2 gy-5">#}
+                <div class="posts">
             {% endif %}
             {% if posts is not null %}
-                <h2 class="title"> News</h2>
+
                 {% for post in posts %}
                     {% include '/home/post.html.twig' %}
                 {% endfor %}
+            {% endif %}
+            {% if not item %}
+                </div>
             {% endif %}
         {% endif %}
     </div>

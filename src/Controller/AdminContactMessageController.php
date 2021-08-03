@@ -34,6 +34,16 @@ class AdminContactMessageController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/message/show/{id}', name: 'admin_contact_message_show')]
+    public function indexShow(int $id): Response
+    {
+        $message = $this->contactMessageRepository->find($id);
+
+        return $this->render('admin_contact_message/index.html.twig', [
+            'messages' => [$message],
+        ]);
+    }
+
     #[Route('/admin/message/{id}', name: 'admin_message_readen')]
     public function read(int $id): Response
     {

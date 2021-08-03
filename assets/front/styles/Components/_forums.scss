@@ -2,6 +2,7 @@
   display: grid;
   grid-gap: 2rem;
   .forum li {
+    position: relative;
     display:flex;
     align-items: center;
     justify-content: space-between;
@@ -13,8 +14,19 @@
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;
     h2 {
-      display:inline-block;
+      display:flex;
       margin-bottom: 0;
+      align-items: center;
+      margin-left: 17rem;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 1rem 0 0 1rem;
+        height: 100%;
+        margin-right:1rem;
+      }
     }
   }
 }

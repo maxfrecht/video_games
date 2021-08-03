@@ -12,6 +12,7 @@
                         </div>
                         <p class="date"
                            style="margin-top: 1rem; opacity: .5; font-style:italic;">{{ game.launchAt|date("m/d/Y") }}</p>
+                        <p class="stars">{{ show_stars(game) }}</p>
                     </div>
                     <div class="game-top-right">
                         {% for device in game.devices %}
@@ -22,7 +23,7 @@
                 <div class="img-box"><img style="--src:url('{{ game.pathImg }}')"
                                           transition-style="in:wipe:top-right" src="{{ game.pathImg }}" alt="">
                 </div>
-                <p>{{ item ? game.description : game.description|slice(0, 255) ~ '...' }}</p>
+                <p>{{ item ? game.description|nl2br : game.description|slice(0, 155) ~ '...' }}</p>
                 {% if not item %}
                     <a class="btn btn-alone" href="{{ path("game_id", {"id": game.id}) }}">Voir la fiche</a>
                 {% else %}
@@ -31,5 +32,8 @@
                 {% endif %}
             </div>
         {% endfor %}
+
     </div>
+    <div class="swiper-button-prev"><span class="material-icons md-48">chevron_left</span></div>
+    <div class="swiper-button-next"><span class="material-icons md-48">chevron_right</span></div>
 </div>

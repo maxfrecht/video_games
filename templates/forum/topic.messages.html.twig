@@ -1,0 +1,47 @@
+{% extends '/layout/user.html.twig' %}
+
+{% block title %}{{ topic.title }} - games{% endblock %}
+
+{% block body %}
+    <div class="container container-full-page-nav">
+        <h1 class="title">Message de {{ topic.title }}</h1>
+        <div class="forums">
+            {% for message in messages %}
+                <ul class="forum message">
+                    <li>
+                        <h3 class="title">{{ message.createdAt|date('\\l\\e d/m/Y à H:i:s') }}</h3>
+                        <p>{{ message.content|nl2br }}</p>
+                        <span><img src="{{ message.user.avatar }}" alt="">{{ message.user.firstName ~ ' ' ~ message.user.lastName|slice(0, 1) }}</span>
+                        {% if message.user is not null %}
+                            {% if app.user is same as(message.user) %}
+                                <div class="buttons">
+                                    <a class="btn"
+                                       href="{{ path('message_edit', {'id': topic.id, 'idMessage': message.id}) }}">Modifier</a>
+                                    <a class="btn btn-danger"
+                                       href="{{ path('message_delete', {'id': topic.id, 'idMessage': message.id}) }}">Supprimer</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+        {% if messages|length < 1 %}
+            <p>Il n'y a pas encore de messages pour ce topic</p>
+        {% endif %}
+        {{ form_start(form, {
+            'attr': {'style': 'margin-top:2rem'}
+        }) }}
+        <div class="form-group">
+            {{ form_widget(form.content, {
+                'attr' : {'placeholder': 'placeholder', 'rows': '15'}
+            }) }}
+            {{ form_label(form.content, 'Contenu') }}
+        </div>
+        {{ form_row(form.submit, {
+            'label': 'Envoyer',
+            'attr': {'class': 'btn'}
+        }) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

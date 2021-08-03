@@ -18,13 +18,13 @@ class TopicType extends AbstractType
         $builder
             ->add('title')
             ->add('pathLogo')
-            ->add('forum', EntityType::class, [
-                'class' => Forum::class,
-                'choice_label' => 'title',
-                'label' => 'Plate-forme',
-                'placeholder' => 'Sélectionner un Forum',
-                'required' => false
-            ])
+//            ->add('forum', EntityType::class, [
+//                'class' => Forum::class,
+//                'choice_label' => 'title',
+//                'label' => 'Plate-forme',
+//                'placeholder' => 'Sélectionner un Forum',
+//                'required' => false
+//            ])
             ->add('submit', SubmitType::class)
         ;
     }

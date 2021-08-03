@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\FiltersGameType;
 use App\Repository\GameCategoryRepository;
 use App\Repository\GameRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -39,6 +42,63 @@ class HomeController extends AbstractController
             'games' => $games,
             'posts' => $posts,
             'item' => false,
+        ]);
+    }
+
+    #[Route('/game-list', name: 'game_list')]
+    public function gameList(PaginatorInterface $paginator, Request $request): Response
+    {
+        $form = $this->createForm(FiltersGameType::class);
+        $form->handleRequest($request);
+//        die();
+
+        $qb = $this->gameRepository->createQueryBuilder('game');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
+            if ($data['title']) {
+                $qb
+                    ->andWhere('game.title LIKE :title')
+                    ->setParameter('title', '%' . $data['title'] . '%');
+            }
+            if($data['pricemin'] && $data['pricemax']) {
+                $qb
+                    ->andWhere('game.price >= :pricemin')
+                    ->setParameter('pricemin', $data['pricemin'])
+                    ->andWhere('game.price <= :pricemax')
+                    ->setParameter('pricemax', $data['pricemax']);
+            }
+            if($data['noteGlobalMin'] && $data['noteGlobalMax']) {
+                $qb
+                    ->andWhere('game.noteGlobal >= :noteGlobalMin')
+                    ->setParameter('noteGlobalMin', $data['noteGlobalMin'])
+                    ->andWhere('game.noteGlobal <= :noteGlobalMax')
+                    ->setParameter('noteGlobalMax', $data['noteGlobalMax']);
+            }
+            if($data['gameCategory']) {
+                $qb
+                    ->join('game.gameCategory', 'gc')
+                    ->andWhere('gc.id = :postcat')
+                    ->setParameter('postcat', $data['gameCategory']->getId());
+            }
+            if($data['devices']) {
+                $qb
+                    ->join('game.devices', 'd')
+                    ->andWhere('d.id = :device')
+                    ->setParameter('device', $data['devices']->getId());
+            }
+        }
+        $pagination = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('home/game-list.html.twig', [
+            'games' => $pagination,
+            'item' => false,
+            'form' => $form->createView()
         ]);
     }
 

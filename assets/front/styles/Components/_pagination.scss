@@ -1,0 +1,26 @@
+.pagination {
+  margin: 4rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: .5rem;
+  background: rgba(241, 241, 241, 0.15);
+  color: #f1f1f1;
+  width: fit-content;
+  * + * {
+    margin-left: 1rem;
+  }
+
+  .current {
+    padding: .5rem;
+    border-radius: .5rem;
+    border: .1rem solid rgba(241, 241, 241, 0.5);
+  }
+  & > * a {
+    color: #f1f1f1;
+  }
+  & .next, & .last {
+    opacity: .5;
+  }
+}

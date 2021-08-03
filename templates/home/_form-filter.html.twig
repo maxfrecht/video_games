@@ -1,0 +1,46 @@
+{{ form_start(form, {
+    'attr' : {'class': 'toggleable'}
+}) }}
+<div class="form-group">
+    {{ form_widget(form.title, {
+        'attr': {'placeholder': 'titre'}
+    }) }}
+    {{ form_label(form.title, 'Titre') }}
+</div>
+<div>
+    <div id="priceSlider"></div>
+    <p id="priceSliderValue">Prix min : 10€ - Prix max : 100€</p>
+</div>
+<div>
+    <div id="noteSlider"></div>
+    <p id="noteSliderValue">Prix min : 10€ - Prix max : 100€</p>
+</div>
+<div class="form-group">
+    {{ form_widget(form.gameCategory) }}
+    {{ form_label(form.gameCategory, 'Catégorie', {
+        'label_attr': {'style' : 'position:relative; transform: none;color:#f1f1f1; order:1; margin-bottom:2rem;font-size: 2.4rem;'}
+    }) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form.devices) }}
+    {{ form_label(form.devices, 'Plate-forme', {
+        'label_attr': {'style' : 'position:relative; transform: none;color:#f1f1f1; order:1; margin-bottom:2rem;font-size: 2.4rem;'}
+    }) }}
+</div>
+{{ form_widget(form.pricemin, {
+    'attr': {'hidden': 'true'}
+}) }}
+{{ form_widget(form.pricemax, {
+    'attr': {'hidden' : 'true'}
+}) }}
+{{ form_widget(form.noteGlobalMin, {
+    'attr': {'hidden': 'true'}
+}) }}
+{{ form_widget(form.noteGlobalMax, {
+    'attr': {'hidden': 'true'}
+}) }}
+{{ form_row(form.submit, {
+    'label': 'Rechercher',
+    'attr': {'style': 'margin-top:2rem;'}
+}) }}
+{{ form_end(form) }}

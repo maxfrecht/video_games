@@ -5,7 +5,7 @@
         <span style="font-style: italic">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
     </div>
     <div class="img-box"><img src="{{ post.pathImg }}" alt="image mise en avant"></div>
-    <p>{{ post.content }}</p>
+    <p>{{ item ? post.content|nl2br : post.content|nl2br|slice(0,100) ~ '...' }}</p>
     {% if not item %}
         <a href="{{ path('post_id', {'id': post.id}) }}" class="btn" style="margin: 0 0 2rem 2rem">Lire
             plus</a>

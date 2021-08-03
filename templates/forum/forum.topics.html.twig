@@ -5,19 +5,32 @@
 {% block body %}
     <div class="container container-full-page-nav">
         <h1 class="title">Sujets du forum</h1>
+        {% if forum is not null %}
         <div class="forums">
             {% for topic in topics %}
                 <ul class="forum">
                     <li>
-                        <h2 class="title">{{ topic.title }}</h2>
-                        <a href="" class="btn">Voir</a>
+                        <h2 class="title"><img src="{{ topic.pathLogo }}" alt=""> {{ topic.title }}</h2>
+                        <div class="buttons">
+                            <a href="{{ path('topic_messages', {'id': topic.id}) }}"
+                               class="btn">Voir</a>
+                            {% if topic.user is not null %}
+                                {% if app.user is same as(topic.user) %}
+                                    <a class="btn"
+                                       href="{{ path('admin_topic_edit', {'id': forum.id, 'idTopic': topic.id}) }}">Modifier</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     </li>
                 </ul>
             {% endfor %}
         </div>
+            <a class="btn" style="margin-top: 2rem" href="{{ path('forum_topic_create', {'id': forum.id }) }}">Créer un
+                nouveau sujet</a>
+        {% endif %}
         {% if topics|length < 1 %}
             <p>Il n'y a pas encore de discussion ouverte dans ce forum</p>
         {% endif %}
-        <a class="btn" style="margin-top: 2rem" href="">Créer un nouveau sujet</a>
+
     </div>
 {% endblock %}

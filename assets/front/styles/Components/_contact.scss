@@ -1,0 +1,14 @@
+@use '../media-queries' as m;
+.abs-img {
+  filter: grayscale(1) sepia(1);
+  opacity: .2;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-75%);
+
+  @include m.mq(small) {
+    top: 0%;
+  }
+}

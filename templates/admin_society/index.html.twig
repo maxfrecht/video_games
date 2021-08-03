@@ -1,0 +1,18 @@
+{% extends 'layout/admin.html.twig' %}
+
+{% block title %}Société{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="title">Société</h1>
+        <ul class="items-crud post-categories">
+            {% for society in societies %}
+                <li class="post-category">
+                    <span>{{ society.ligne1 }}</span>
+                    <a class="btn btn-success"
+                       href="{{ path("admin_society_edit", {'id': society.id}) }}">↑</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

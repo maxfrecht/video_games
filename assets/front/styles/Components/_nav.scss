@@ -1,15 +1,17 @@
 nav {
   position: relative;
   border-bottom: .1rem solid rgba(241, 241, 241, 0.2);
-  margin-bottom:4rem;
+  margin-bottom: 4rem;
   background: rgb(53, 16, 92);
+
   .container {
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     min-height: var(--nav-height);
     line-height: 3.5rem;
   }
+
   .navbar-brand {
     font-size: 3.5rem;
     font-weight: 700;
@@ -17,19 +19,44 @@ nav {
     opacity: 1;
     z-index: 1;
   }
+
   .nav-items {
     display: flex;
     font-size: 1.8rem;
     z-index: 1;
-    opacity:1;
+    opacity: 1;
     align-items: center;
+
     li + li {
       margin-left: 4.5rem;
+    }
+
+    .notification {
+      position: relative;
+      .count-message {
+        position: absolute;
+        top: -30%;
+        left: 70%;
+        color: #f1f1f1;
+        background: #b45555;
+        font-weight: 700;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        max-height: 2rem;
+        min-width: 2rem;
+        justify-content: center;
+      }
+      & .drop-down {
+        min-width: fit-content;
+      }
     }
 
     .nav-item {
       position: relative;
       cursor: pointer;
+
       .drop-down {
         display: none;
         position: absolute;
@@ -49,20 +76,23 @@ nav {
 
           &:hover {
             background: #f1f1f1;
+
             &:first-of-type {
               border-radius: .5rem .5rem 0 0;
             }
+
             &:last-of-type {
               border-radius: 0 0 .5rem .5rem
             }
           }
         }
+
         li a {
           color: #333;
           width: 100%;
-          display: inline-block
-        ;
+          display: inline-block;
         }
+
         li + li {
           margin: 0;
           padding-top: .5rem;
@@ -76,6 +106,7 @@ nav {
       background: rgba(241, 241, 241, 0.16);
     }
   }
+
   &:after {
     content: '';
     display: inline-block;
@@ -90,4 +121,6 @@ nav {
     filter: grayscale(1) brightness(1.5);
     opacity: .1;
   }
+
+
 }
