@@ -3,43 +3,47 @@ let content = document.querySelector('.game-list');
 let form: HTMLFormElement = document.querySelector('.toggleable');
 let isFetching = false;
 let hasMoreData = true;
+let bodyContent = null;
 
 export function handleForm() {
-    // form.addEventListener('submit', (e) => {
-    //     e.preventDefault();
-        let data = new FormData(form);
-        let body = {};
-        for (let pair of data.entries()) {
-            let key = pair[0].split('[').pop().split(']')[0]
-            if (pair[1] && key !== '_token') {
-                body[key] = pair[1];
-            }
+    let data = new FormData(form);
+    let body = {};
+
+    for (let pair of data.entries()) {
+        let key = pair[0].split('[').pop().split(']')[0]
+        if (pair[1] && key !== '_token') {
+            body[key] = pair[1];
         }
-        page = 1;
-        content.innerHTML = '';
-        fetchData(body);
-    // })
+    }
+    page = 1;
+    hasMoreData = true;
+    content.innerHTML = '';
+    bodyContent = body;
+    fetchData();
 }
 
-function fetchData(body = null) {
+function fetchData() {
     isFetching = true;
-    console.log(body);
+    console.log(bodyContent);
     fetch('/games-ajax?page=' + page, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'multipart/form-data'
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(bodyContent),
     })
         .then(result => result.json())
         .then(data => {
-            content.insertAdjacentHTML('beforeend', data['html'])
-            page++;
-            isFetching = false;
+            console.log(data.html)
             if (data.html === '') {
                 hasMoreData = false;
             }
+
+            content.insertAdjacentHTML('beforeend', data['html'])
+            page++;
+
+            isFetching = false;
         });
 }
 
@@ -53,24 +57,6 @@ if (location.pathname === '/game-list-ajax') {
             fetchData();
         }
     })
-
-
-    // form.addEventListener('submit', (e) => {
-    //     e.preventDefault();
-    //     let data = new FormData(form);
-    //     let body = {};
-    //     for (let pair of data.entries()) {
-    //         let key = pair[0].split('[').pop().split(']')[0]
-    //         if (pair[1] && key !== '_token') {
-    //             body[key] = pair[1];
-    //         }
-    //     }
-    //     page = 1;
-    //     content.innerHTML = '';
-    //     fetchData(body);
-    // })
-
-
 }
 
 
