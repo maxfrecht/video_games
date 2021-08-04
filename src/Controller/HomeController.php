@@ -9,6 +9,7 @@ use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,13 +46,41 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/game-list-ajax', name: 'game_list_ajax')]
+    public function gameListAjax(): Response
+    {
+        return $this->render('home/game-list-ajax.html.twig', [
+
+        ]);
+    }
+
+    #[Route('/games-ajax', name: 'games_ajax')]
+    public function testAjax(PaginatorInterface $paginator, Request $request): Response
+    {
+        $qb = $this->gameRepository->getQbAll();
+        $pagination = $paginator->paginate(
+          $qb,
+          $request->query->getInt('page', 1),
+          4
+        );
+
+        $html = $this->renderView('home/game-card.html.twig', [
+            'pagination' => $pagination
+        ]);
+
+        $response = new JsonResponse();
+        $response->setData([
+            'html' => $html
+        ]);
+
+        return $response;
+    }
+
     #[Route('/game-list', name: 'game_list')]
     public function gameList(PaginatorInterface $paginator, Request $request): Response
     {
         $form = $this->createForm(FiltersGameType::class);
         $form->handleRequest($request);
-//        die();
-
         $qb = $this->gameRepository->createQueryBuilder('game');
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,16 +100,16 @@ class HomeController extends AbstractController
             }
             if($data['noteGlobalMin'] && $data['noteGlobalMax']) {
                 $qb
-                    ->andWhere('game.noteGlobal >= :noteGlobalMin')
-                    ->setParameter('noteGlobalMin', $data['noteGlobalMin'])
-                    ->andWhere('game.noteGlobal <= :noteGlobalMax')
-                    ->setParameter('noteGlobalMax', $data['noteGlobalMax']);
+                    ->andWhere('game.noteGlobal >= :notemin')
+                    ->setParameter('notemin', intval($data['noteGlobalMin']))
+                    ->andWhere('game.noteGlobal <= :notemax')
+                    ->setParameter('notemax', intval($data['noteGlobalMax']));
             }
             if($data['gameCategory']) {
                 $qb
-                    ->join('game.gameCategory', 'gc')
-                    ->andWhere('gc.id = :postcat')
-                    ->setParameter('postcat', $data['gameCategory']->getId());
+                    ->innerJoin('game.gameCategory', 'gc')
+                    ->andWhere('gc.id = :gamecat')
+                    ->setParameter('gamecat', $data['gameCategory']->getId());
             }
             if($data['devices']) {
                 $qb

@@ -1,16 +1,14 @@
 <div class="post game">
     <div class="game-top">
-        <h2 class="title">{{ post.title }}<br><span
+        <h2 class="title title-medium">{{ post.title }}<br><span
                     style="font-size: 1.4rem">nombre de vue : {{ post.numberView }}</span></h2>
-        <span style="font-style: italic">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
+        <span class="author">{{ post.user.FirstName ~ " " ~ post.user.LastName }}</span>
     </div>
     <div class="img-box"><img src="{{ post.pathImg }}" alt="image mise en avant"></div>
-    <p>{{ item ? post.content|nl2br : post.content|nl2br|slice(0,100) ~ '...' }}</p>
+    <p class="description">{{ item ? post.content|nl2br : post.content|nl2br|slice(0,100) ~ '...' }}</p>
     {% if not item %}
-        <a href="{{ path('post_id', {'id': post.id}) }}" class="btn" style="margin: 0 0 2rem 2rem">Lire
-            plus</a>
+        <a href="{{ path('post_id', {'id': post.id}) }}" class="btn-icon"  style="margin: 0 0 2rem 2rem"><span class="material-icons">zoom_in</span></a>
     {% else %}
-        <a href="{{ path('home') }}" class="btn" style="margin: 0 0 2rem 2rem">Retour à
-            l'accueil</a>
+        <a href="{{ path('home') }}" class="btn-icon"><span class="material-icons">arrow_back</span></a>
     {% endif %}
 </div>

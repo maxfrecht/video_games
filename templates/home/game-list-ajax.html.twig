@@ -1,0 +1,14 @@
+{% extends '/layout/user.html.twig' %}
+{% block title %}home{% endblock %}
+{% block bodyclass %}home{% endblock %}
+{% block body %}
+
+    <div class="container">
+        {% if not app.user %}
+            <p>Connectez-vous et profitez de ce super mega trop top site !!!!!!!!!!!!!!!!</p>
+        {% endif %}
+        {% if app.user %}
+            <div class="game-list"></div>
+        {% endif %}
+    </div>
+{% endblock %}

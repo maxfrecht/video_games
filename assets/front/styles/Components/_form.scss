@@ -20,14 +20,16 @@ p[id^='priceSlider'], p[id^='noteSlider'] {
   &:after {
     transform: rotate(180deg);
   }
+
 }
 .toggleable {
   max-height: 0;
+  opacity: 0;
+  transition: max-height .2s ease-in-out, opacity .2s ease-in-out;
 }
 form, .form-box {
   display: flex;
   flex-direction: column;
-  transition: max-height .2s ease-in-out;
   overflow: hidden;
   div:last-of-type:not(.form-group):not(#game_gameCategory):not(#game_devices) {
     display: flex;

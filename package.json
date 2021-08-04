@@ -17,9 +17,11 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@types/aos": "^3.0.4",
         "@types/nouislider": "^15.0.0",
         "@types/swiper": "^5.4.3",
         "animate.css": "^4.1.1",
+        "aos": "^2.3.4",
         "bootstrap": "^5.0.2",
         "material-design-icons": "^3.0.1",
         "nouislider": "^15.2.0",

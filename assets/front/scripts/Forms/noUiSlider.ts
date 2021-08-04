@@ -2,7 +2,6 @@ import * as noUiSlider from 'nouislider';
 
 export function initNoUiSlider() {
     if (location.pathname === '/game-list') {
-
         let priceMinInput: HTMLInputElement = document.querySelector('#filters_game_pricemin');
         let priceMaxInput: HTMLInputElement = document.querySelector('#filters_game_pricemax');
         let noteMinInput: HTMLInputElement = document.querySelector('#filters_game_noteGlobalMin');
@@ -18,16 +17,16 @@ export function initNoUiSlider() {
             connect: true,
             step: 1,
             range: {
-                min: 0,
+                min: 1,
                 max: 100
             }
         })
         let noteslider = noUiSlider.create(noteSlider, {
-            start: [0, 10],
+            start: [1, 10],
             connect: true,
             step: 1,
             range: {
-                min: 0,
+                min: 1,
                 max: 10
             }
         })
@@ -39,7 +38,6 @@ export function initNoUiSlider() {
 
         let priceSliderValueElement = document.querySelector('#priceSliderValue');
         priceslider.on('update', () => {
-            console.log(priceslider.get());
             priceSliderValueElement.innerHTML = `Prix min : <strong>${parseInt(priceslider.get()[0]).toFixed()}€</strong> - Prix max : <strong>${parseInt(priceslider.get()[1]).toFixed()}€</strong>`;
         })
 

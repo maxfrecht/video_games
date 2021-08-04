@@ -4,10 +4,14 @@
   grid-template: 1fr / 1fr 2fr 1fr;
   grid-gap: 4rem;
   grid-auto-flow: row;
+
+
 }
 
 .post {
-
+  .author {
+    font-style: italic; opacity: .5; font-size: 1.2rem
+  }
   .game-top {
     display: block;
   }

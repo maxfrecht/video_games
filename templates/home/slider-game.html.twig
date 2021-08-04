@@ -1,18 +1,17 @@
-<div class="swiper-games">
+<div class="swiper-games" data-aos="fade-in">
     <div class="swiper-wrapper">
         {% for game in games %}
             <div class="swiper-slide game {{ item ? 'game-alone' : '' }} {{ loop.first ? 'swiper-slide-active' : '' }}">
                 <div class="game-top">
                     <div class="game-top-left">
-                        <h2 class="title">{{ game.title }}</h2>
-                        <div class="categories animate__animated animate__heartBeat">
+                        <h2 class="title title-medium">{{ game.title }}</h2>
+                        <div class="categories animate__animated animate__fadeInLeft">
                             {% for category in game.gameCategory %}
                                 <p>{{ category.name }}</p>
                             {% endfor %}
                         </div>
-                        <p class="date"
-                           style="margin-top: 1rem; opacity: .5; font-style:italic;">{{ game.launchAt|date("m/d/Y") }}</p>
-                        <p class="stars">{{ show_stars(game) }}</p>
+                        <p class="stars" style="margin-top: 1rem">{{ show_stars(game) }}</p>
+
                     </div>
                     <div class="game-top-right">
                         {% for device in game.devices %}
@@ -20,15 +19,16 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="img-box"><img style="--src:url('{{ game.pathImg }}')"
-                                          transition-style="in:wipe:top-right" src="{{ game.pathImg }}" alt="">
+                <div class="img-box" style="--src:url('{{ game.pathImg }}')" ><img src="{{ game.pathImg }}" alt="">
                 </div>
-                <p>{{ item ? game.description|nl2br : game.description|slice(0, 155) ~ '...' }}</p>
+                <p class="description">{{ item ? game.description|nl2br : game.description|slice(0, 155) ~ '...' }}</p>
                 {% if not item %}
-                    <a class="btn btn-alone" href="{{ path("game_id", {"id": game.id}) }}">Voir la fiche</a>
+                    <a class="btn-icon btn-alone" href="{{ path("game_id", {"id": game.id}) }}"><span
+                                class="material-icons">zoom_in</span></a>
                 {% else %}
                     <div class="btn-group"><a href="#" class="btn ">Voir les sujets associés</a>
-                        <a href="{{ path("home") }}" class="btn">Retour à la liste de jeux</a></div>
+                        <a href="{{ path("home") }}" class="btn-icon"><span class="material-icons">arrow_back</span></a>
+                    </div>
                 {% endif %}
             </div>
         {% endfor %}

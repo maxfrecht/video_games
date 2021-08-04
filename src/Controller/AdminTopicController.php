@@ -44,7 +44,7 @@ class AdminTopicController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin_topic_show', methods: ['GET'])]
+    #[Route('show/{id}', name: 'admin_topic_show', methods: ['GET'])]
     public function show(Topic $topic): Response
     {
         return $this->render('admin_topic/show.html.twig', [
@@ -52,7 +52,7 @@ class AdminTopicController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'admin_topic_edit', methods: ['GET', 'POST'])]
+    #[Route('edit/{id}', name: 'admin_topic_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Topic $topic): Response
     {
         $form = $this->createForm(TopicType::class, $topic);
@@ -70,7 +70,7 @@ class AdminTopicController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin_topic_delete', methods: ['POST'])]
+    #[Route('delete/{id}', name: 'admin_topic_delete', methods: ['POST'])]
     public function delete(Request $request, Topic $topic): Response
     {
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {

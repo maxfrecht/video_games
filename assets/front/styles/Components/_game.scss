@@ -3,21 +3,42 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 4rem;
 }
+.stars {
+  color: #e0d0ff
+}
 .game {
+  position: relative;
   background: rgba( 255, 255, 255, 0.2 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   border-radius: 10px;
   min-height: 100%;
+  &:hover {
+    .img-box  {
+      img, &:after {
+        transform: scale(1.025);
+      }
+    }
+  }
+  .btn-icon {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+  }
   p {
     font-size: 1.6rem;
     line-height: 2.6rem;
+  }
+  .description {
+    margin-bottom: 8rem;
   }
   .img-box {
     min-width:100%;
     max-height: 32.5rem;
     overflow: hidden;
+    object-fit: cover;
+    position: relative;
     &:after {
       content: '';
       background-image: var(--src);
@@ -25,15 +46,19 @@
       position: absolute;
       top: 0;
       left: 0;
-      height: 20rem;
-      width: 20rem;
-      background-size: 20rem 20rem;
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      transition: transform .2s ease-in-out;
     }
   }
   img {
     position: relative;
+    object-fit: cover;
+    object-position: center bottom;
     min-width: 100%;
     animation-duration:1.5s;
+    transition: transform .2s ease-in-out;
   }
   & > *:not(.img-box):not(a) {
     padding: 2rem;
@@ -50,14 +75,12 @@
 }
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 7.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(5rem, 9rem));
   grid-gap: 1rem;
   overflow: hidden;
 
   p {
-    display: inline-block;
     text-align: center;
-    padding: .1rem .5rem;
     border-radius:.3rem;
     font-size: 1.4rem;
   }
@@ -81,7 +104,7 @@
 
 .game-top {
   .title {
-    max-width: 70%;
+    max-width: 80%;
   }
   display: grid;
   grid-template-columns: repeat(2,auto);
@@ -89,11 +112,11 @@
 }
 .game-top-right {
   height: fit-content;
-  flex: 30%;
   display:grid;
   direction: rtl;
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fill, 2rem);
+  place-items: center;
   img {
     max-width: 1rem;
     filter: grayscale(1);

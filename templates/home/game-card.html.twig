@@ -1,0 +1,26 @@
+{% for game in pagination %}
+<div data-aos="fade-in" class="game">
+    <div class="game-top">
+        <div class="game-top-left">
+            <h2 class="title title-medium">{{ game.title }}</h2>
+            <div class="categories animate__animated animate__fadeInLeft">
+                {% for category in game.gameCategory %}
+                    <p>{{ category.name }}</p>
+                {% endfor %}
+            </div>
+            <p class="stars" style="margin-top: 1rem">{{ show_stars(game) }}</p>
+        </div>
+        <div class="game-top-right">
+            {% for device in game.devices %}
+                <img src="{{ device.pathLogo }}" alt="logo device">
+            {% endfor %}
+        </div>
+    </div>
+    <div class="img-box" style="--src:url('{{ game.pathImg }}')"><img src="{{ game.pathImg }}"
+                                                                      alt="">
+    </div>
+    <p class="description">{{ game.description|slice(0,155) }}</p>
+    <a class="btn-icon btn-alone" href="{{ path("game_id", {"id": game.id}) }}"><span
+                class="material-icons">zoom_in</span></a>
+</div>
+{% endfor %}
