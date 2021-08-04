@@ -79,6 +79,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $payments;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBanned;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbrBannedMessages;
+
     public function __construct()
     {
         $this->Posts = new ArrayCollection();
@@ -359,6 +369,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $payment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsBanned(): ?bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): self
+    {
+        $this->isBanned = $isBanned;
+
+        return $this;
+    }
+
+    public function getNbrBannedMessages(): ?int
+    {
+        return $this->nbrBannedMessages;
+    }
+
+    public function setNbrBannedMessages(int $nbrBannedMessages): self
+    {
+        $this->nbrBannedMessages = $nbrBannedMessages;
 
         return $this;
     }

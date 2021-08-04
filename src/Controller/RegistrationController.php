@@ -27,6 +27,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setNbrBannedMessages(0);
+            $user->setIsBanned(false);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
