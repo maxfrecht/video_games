@@ -1,5 +1,5 @@
 export function toggleForm() {
-    if(location.pathname === '/game-list') {
+    if(location.pathname.startsWith('/game-list')) {
         let btnToggleElement = document.querySelector('.toggle-form');
         let form: HTMLFormElement = document.querySelector('.toggleable');
         btnToggleElement.addEventListener('click', (e) => {

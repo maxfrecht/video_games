@@ -8,6 +8,8 @@
             <p>Connectez-vous et profitez de ce super mega trop top site !!!!!!!!!!!!!!!!</p>
         {% endif %}
         {% if app.user %}
+            <h2 class="title toggle-form">Filtrer les jeux</h2>
+            {% include 'home/_form-filter.html.twig' %}
             <div class="game-list"></div>
         {% endif %}
     </div>

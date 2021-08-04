@@ -1,7 +1,7 @@
 import * as noUiSlider from 'nouislider';
-
+import {handleForm} from "../ScrollLoader/scrollLoader";
 export function initNoUiSlider() {
-    if (location.pathname === '/game-list') {
+    if (location.pathname.startsWith('/game-list')) {
         let priceMinInput: HTMLInputElement = document.querySelector('#filters_game_pricemin');
         let priceMaxInput: HTMLInputElement = document.querySelector('#filters_game_pricemax');
         let noteMinInput: HTMLInputElement = document.querySelector('#filters_game_noteGlobalMin');
@@ -42,10 +42,12 @@ export function initNoUiSlider() {
         })
 
         form.addEventListener('submit', (e) => {
+            e.preventDefault();
             priceMinInput.value = priceslider.get()[0];
             priceMaxInput.value = priceslider.get()[1];
             noteMinInput.value = noteslider.get()[0];
             noteMaxInput.value = noteslider.get()[1];
+            handleForm();
         })
     }
 }

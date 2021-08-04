@@ -47,21 +47,60 @@ class HomeController extends AbstractController
     }
 
     #[Route('/game-list-ajax', name: 'game_list_ajax')]
-    public function gameListAjax(): Response
+    public function gameListAjax(Request $request): Response
     {
-        return $this->render('home/game-list-ajax.html.twig', [
+        $form = $this->createForm(FiltersGameType::class);
 
+        return $this->render('home/game-list-ajax.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/games-ajax', name: 'games_ajax')]
     public function testAjax(PaginatorInterface $paginator, Request $request): Response
     {
+        $content = $request->getContent();
+        $data = json_decode($content);
         $qb = $this->gameRepository->getQbAll();
+
+        if($data) {
+            if(isset($data->title)) {
+                $qb
+                    ->andWhere('game.title LIKE :title')
+                    ->setParameter('title', '%' . $data->title . '%');
+            }
+            if (isset($data->pricemin) && isset($data->pricemax)) {
+                $qb
+                    ->andWhere('game.price >= :pricemin')
+                    ->setParameter('pricemin', $data->pricemin)
+                    ->andWhere('game.price <= :pricemax')
+                    ->setParameter('pricemax', $data->pricemax);
+            }
+            if (isset($data->noteGlobalMin) && isset($data->noteGlobalMax)) {
+                $qb
+                    ->andWhere('game.noteGlobal >= :notemin')
+                    ->setParameter('notemin', intval($data->noteGlobalMin))
+                    ->andWhere('game.noteGlobal <= :notemax')
+                    ->setParameter('notemax', intval($data->noteGlobalMax));
+            }
+            if (isset($data->gameCategory)) {
+                $qb
+                    ->innerJoin('game.gameCategory', 'gc')
+                    ->andWhere('gc.id = :gamecat')
+                    ->setParameter('gamecat', $data->gameCategory);
+            }
+            if (isset($data->devices)) {
+                $qb
+                    ->join('game.devices', 'd')
+                    ->andWhere('d.id = :device')
+                    ->setParameter('device', $data->devices);
+            }
+        }
+
         $pagination = $paginator->paginate(
-          $qb,
-          $request->query->getInt('page', 1),
-          4
+            $qb,
+            $request->query->getInt('page', 1),
+            4
         );
 
         $html = $this->renderView('home/game-card.html.twig', [
@@ -70,7 +109,7 @@ class HomeController extends AbstractController
 
         $response = new JsonResponse();
         $response->setData([
-            'html' => $html
+            'html' => $html,
         ]);
 
         return $response;
@@ -91,27 +130,27 @@ class HomeController extends AbstractController
                     ->andWhere('game.title LIKE :title')
                     ->setParameter('title', '%' . $data['title'] . '%');
             }
-            if($data['pricemin'] && $data['pricemax']) {
+            if ($data['pricemin'] && $data['pricemax']) {
                 $qb
                     ->andWhere('game.price >= :pricemin')
                     ->setParameter('pricemin', $data['pricemin'])
                     ->andWhere('game.price <= :pricemax')
                     ->setParameter('pricemax', $data['pricemax']);
             }
-            if($data['noteGlobalMin'] && $data['noteGlobalMax']) {
+            if ($data['noteGlobalMin'] && $data['noteGlobalMax']) {
                 $qb
                     ->andWhere('game.noteGlobal >= :notemin')
                     ->setParameter('notemin', intval($data['noteGlobalMin']))
                     ->andWhere('game.noteGlobal <= :notemax')
                     ->setParameter('notemax', intval($data['noteGlobalMax']));
             }
-            if($data['gameCategory']) {
+            if ($data['gameCategory']) {
                 $qb
                     ->innerJoin('game.gameCategory', 'gc')
                     ->andWhere('gc.id = :gamecat')
                     ->setParameter('gamecat', $data['gameCategory']->getId());
             }
-            if($data['devices']) {
+            if ($data['devices']) {
                 $qb
                     ->join('game.devices', 'd')
                     ->andWhere('d.id = :device')
@@ -121,7 +160,7 @@ class HomeController extends AbstractController
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            6
+            4
         );
 
         return $this->render('home/game-list.html.twig', [

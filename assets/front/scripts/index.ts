@@ -4,11 +4,10 @@ import {initSwiper} from "./Sliders/slider-games";
 import {initNoUiSlider} from "./Forms/noUiSlider";
 // import {scrollLoader} from "./ScrollLoader/scrollLoader";
 import {initAOS} from "./scrollEffects/scrollEffects";
-import './ScrollLoader/scrollLoader';
 
 initAOS()
 toggleContactMessageContent();
-// scrollLoader();
 initNoUiSlider();
+import './ScrollLoader/scrollLoader';
 toggleForm();
 initSwiper();
